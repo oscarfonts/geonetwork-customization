@@ -12,7 +12,10 @@
         <link rel="stylesheet" href="reveal.js/css/theme/sky.css">
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
         <style type="text/css">
-            p > code.hljs { display: inline; }
+            p > code.hljs {
+                display: inline;
+                font-size: x-large;
+            }
         </style>
     </head>
     <body>
@@ -106,11 +109,94 @@
                     <section>Interfaz edición</section>
                     <section>...</section>
                 </section>
-                <section>Multiidioma
-                    <section>Transifex</section>
-                    <section>Schema plugins (xmls)</section>
-                    <section>Multiidioma metadatos</section>
-                    <section>Limitaciones</section>
+                <section>
+                    <h3>Multiidioma</h3>
+                    <h4>Transifex</h4>
+                    <img src="images/transifex.png"/>
+                    <a href="https://www.transifex.com/geonetwork/core-geonetwork/" target="_blank">https://www.transifex.com/geonetwork/core-geonetwork/</a>
+                </section>
+                <section>
+                    <h3>Multiidioma</h3>
+                    <h4>Schema Plugins (XML)</h4>
+                    <section>
+                        <p><code class="hljs">GN_DATA_DIR => config/schema_plugins/[iso19139]/loc/[spa]/*.xml</code></p>
+                        <p><code class="hljs">strings.xml</code></p>
+                        <p><code class="hljs">labels.xml</code></p>
+                        <pre><code class="xml">
+    <element name="gmd:MD_Metadata" id="1.0">
+        <label>Metadatos</label>
+        <abbrLabel>Metadatos</abbrLabel>
+        <description>Entidad raíz que define los metadatos de un recurso o recursos</description>
+    </element>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><code class="hljs">codelists.xml</code></p>
+                        <pre><code class="xml">
+    <codelist name="gmd:CI_PresentationFormCode">
+        <entry>
+            <code>documentDigital</code>
+            <label>Documento digital</label>
+            <description>...</description>
+        </entry>
+        <entry>
+            <code>imageDigital</code>
+            <label>Imagen digital</label>
+            <description>...</description>
+        </entry>
+        ...
+    </codelist>
+    </code></pre>
+                    </section>
+                        
+                </section>
+                <section>
+                    <h3>Multiidioma</h3>
+                    <h4>Los metadatos</h4>
+                    <section>
+                        <h5>1. El idioma principal</h5>
+                        <pre><code class="xml">
+<gmd:language>
+    <gmd:LanguageCode codeListValue="spa" codeList="http://www.loc.gov/standards/iso639-2/"></gmd:LanguageCode>
+</gmd:language>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h5>2. Definir idiomas secundarios</h5>
+                        <pre><code class="xml">
+<gmd:locale>
+    <gmd:PT_Locale id="en">
+        <gmd:languageCode>
+            <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng"/>
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+            <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode"
+                                     codeListValue="utf8"/>
+        </gmd:characterEncoding>
+    </gmd:PT_Locale>
+</gmd:locale>
+<gmd:locale>...</gmd:locale>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h5>3. Textos multilingües</h5>
+                        <pre><code class="xml">
+<gmd:xxxxxxxxx xsi:type="gmd:PT_FreeText_PropertyType">
+    <gco:CharacterString>Texto en el idioma principal</gco:CharacterString>
+    <gmd:PT_FreeText>
+        <gmd:textGroup>
+            <gmd:LocalisedCharacterString locale="#en">Text in secondary language</gmd:LocalisedCharacterString>
+        </gmd:textGroup>
+        <gmd:textGroup>...</gmd:textGroup>
+    </gmd:PT_FreeText>
+</gmd:xxxxxxxxx>
+                        </code></pre>
+                    </section>
+                </section>
+                <section>
+                    <h3>Multiidioma</h3>
+                    <h4>Ejemplo formulario de edición</h4>
+                    <img src="images/multilang.png"/>
                 </section>
                 <section>Adaptar aspecto gráfico: web-ui, CSS
                     <section>Cómo adaptar interfaz de búsqueda</section>
