@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="reveal.js/css/theme/sky.css">
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
         <style type="text/css">
-            p > code.hljs {
+            p > code.hljs, li > code.hljs {
                 display: inline;
                 font-size: x-large;
             }
@@ -76,36 +76,36 @@
                     <section>
                         <p><code class="hljs">GN_BASE => WEB-INF/config-node/srv.xml</code></p>
                         <pre><code class="xml">
-    <!--import resource="../config-db/h2.xml"/-->
-    <import resource="../config-db/postgres.xml"></import>
+<!--import resource="../config-db/h2.xml"/-->
+&lt;import resource="../config-db/postgres.xml"/>
                         </code></pre>
                     </section>
                     <section>
                         <p><code class="hljs">GN_BASE => WEB-INF/config-db/jdbc.properties</code></p>
                         <pre><code class="properties">
-    jdbc.host=127.0.0.1
-    jdbc.port=5432
-    jdbc.database=gn_db
-    jdbc.username=gn_user
-    jdbc.password=gn_pass
+jdbc.host=127.0.0.1
+jdbc.port=5432
+jdbc.database=gn_db
+jdbc.username=gn_user
+jdbc.password=gn_pass
                         </code></pre>
                     </section>
                     <section>
                         <p><code class="hljs">GN_BASE => WEB-INF/config-db/postgres.xml</code></p>
                         <pre><code class="xml">
-    ...
-    <import resource="postgis-alternate-datasource.xml"></import>
-    ...
-    <bean id="jdbcDriverClassName" class="java.lang.String">
-        <!--constructor-arg value="org.postgresql.Driver"/-->
-        <constructor-arg value="org.postgis.DriverWrapper"></constructor-arg>
-    </bean>
-    ...
-    <bean id="jdbcURL" class="java.lang.String">
-        <!--constructor-arg value="jdbc:postgresql://${jdbc.host}:5432/${jdbc.database}"/-->
-        <constructor-arg value="jdbc:postgresql_postGIS://${jdbc.host}:${jdbc.port}/${jdbc.database}"></constructor-arg>
-    </bean>
-    ...
+...
+&lt;import resource="postgis-alternate-datasource.xml">&lt;/import>
+...
+&lt;bean id="jdbcDriverClassName" class="java.lang.String">
+    <!--constructor-arg value="org.postgresql.Driver"/-->
+    &lt;constructor-arg value="org.postgis.DriverWrapper">&lt;/constructor-arg>
+&lt;/bean>
+...
+&lt;bean id="jdbcURL" class="java.lang.String">
+    <!--constructor-arg value="jdbc:postgresql://${jdbc.host}:5432/${jdbc.database}"/-->
+    &lt;constructor-arg value="jdbc:postgresql_postGIS://${jdbc.host}:${jdbc.port}/${jdbc.database}">&lt;/constructor-arg>
+&lt;/bean>
+...
                         </code></pre>
                     </section>
                 </section>
@@ -113,7 +113,7 @@
                 <section data-background="images/leon1.jpg"><h2>Lo que necesito</h2></section>
                 <section data-background="images/fakeleon.jpg"><h2>Busco lo más parecido</h2></section>
                 <section>
-                    <section data-background="images/fit.jpg" ><h2>Adaptamos</h2></section>
+                    <section data-background="images/fit.jpg"><h2>Adaptamos</h2></section>
                     <section data-background="images/structure.jpg"><h2>XSD</h2></section>
                     <section data-background="images/fit2.jpg"><h2>Metadata View</h2><h3><a href="https://github.com/geonetwork/core-geonetwork/blob/develop/web-ui/src/main/resources/catalog/views/default/templates/recordView.html">recordView.html</h3></section>
                     <section data-background="images/smart.jpg"><h2>Editor</h2><h3><a href="https://github.com/geonetwork/core-geonetwork/blob/develop/schemas/iso19139/src/main/plugin/iso19139/layout/config-editor.xml">config-editor.xml</a></h3></section>
@@ -121,6 +121,28 @@
                     <section data-background="images/leon2.jpg" ><h2>Mi esquema</h2></section>
                 </section>
                 <section data-background="images/diversidad.jpg" ><h2><a href="https://github.com/metadata101">Metadata 101</a></h2></section>
+                <section>
+                    <h3>Ejemplo metadato extendido</h3>
+                    <pre><code class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;acme:MD_Metadata xmlns="http://www.isotc211.org/2005/gmd"
+                  xmlns:acme="http://example.com/schema/acme"
+                  xmlns:gco="http://www.isotc211.org/2005/gco"
+                  xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                  gco:isoType="gmd:MD_Metadata">
+    <!-- Here would be the standard gco: ISO metadata sections -->
+    &lt;acme:myFields>
+        &lt;acme:myTextField>My Free Text Content&lt;/acme:myTextField>
+        &lt;acme:codelistField>
+            &lt;acme:codelistValue>CATEGORY_1&lt;/acme:codelistValue>
+        &lt;/acme:codelistField>
+        &lt;acme:dateField>
+            &lt;gco:Date>1931-04-14&lt;/gco:Date>
+        &lt;/acme:dateField>
+    &lt;/acme:myFields>
+&lt;/acme:MD_Metadata>
+                    </code></pre>
+                </section>
                 <section>
                     <h3>Multiidioma</h3>
                     <h4>Transifex</h4>
@@ -135,30 +157,30 @@
                         <p><code class="hljs">strings.xml</code></p>
                         <p><code class="hljs">labels.xml</code></p>
                         <pre><code class="xml">
-    <element name="gmd:MD_Metadata" id="1.0">
-        <label>Metadatos</label>
-        <abbrLabel>Metadatos</abbrLabel>
-        <description>Entidad raíz que define los metadatos de un recurso o recursos</description>
-    </element>
+&lt;element name="gmd:MD_Metadata" id="1.0">
+    &lt;label>Metadatos&lt;/label>
+    &lt;abbrLabel>Metadatos&lt;/abbrLabel>
+    &lt;description>Entidad raíz que define los metadatos de un recurso o recursos&lt;/description>
+&lt;/element>
                         </code></pre>
                     </section>
                     <section>
                         <p><code class="hljs">codelists.xml</code></p>
                         <pre><code class="xml">
-    <codelist name="gmd:CI_PresentationFormCode">
-        <entry>
-            <code>documentDigital</code>
-            <label>Documento digital</label>
-            <description>...</description>
-        </entry>
-        <entry>
-            <code>imageDigital</code>
-            <label>Imagen digital</label>
-            <description>...</description>
-        </entry>
-        ...
-    </codelist>
-    </code></pre>
+&lt;codelist name="gmd:CI_PresentationFormCode">
+    &lt;entry>
+        &lt;code>documentDigital&lt;/code>
+        &lt;label>Documento digital&lt;/label>
+        &lt;description>...&lt;/description>
+    &lt;/entry>
+    &lt;entry>
+        &lt;code>imageDigital&lt;/code>
+        &lt;label>Imagen digital&lt;/label>
+        &lt;description>...&lt;/description>
+    &lt;/entry>
+    ...
+&lt;/codelist>
+                        </code></pre>
                     </section>
                         
                 </section>
@@ -168,40 +190,40 @@
                     <section>
                         <h5>1. El idioma principal</h5>
                         <pre><code class="xml">
-<gmd:language>
-    <gmd:LanguageCode codeListValue="spa" codeList="http://www.loc.gov/standards/iso639-2/"></gmd:LanguageCode>
-</gmd:language>
+&lt;gmd:language>
+    &lt;gmd:LanguageCode codeListValue="spa" codeList="http://www.loc.gov/standards/iso639-2/">&lt;/gmd:LanguageCode>
+&lt;/gmd:language>
                         </code></pre>
                     </section>
                     <section>
                         <h5>2. Definir idiomas secundarios</h5>
                         <pre><code class="xml">
-<gmd:locale>
-    <gmd:PT_Locale id="en">
-        <gmd:languageCode>
-            <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng"/>
-        </gmd:languageCode>
-        <gmd:characterEncoding>
-            <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode"
+&lt;gmd:locale>
+    &lt;gmd:PT_Locale id="en">
+        &lt;gmd:languageCode>
+            &lt;gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng"/>
+        &lt;/gmd:languageCode>
+        &lt;gmd:characterEncoding>
+            &lt;gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode"
                                      codeListValue="utf8"/>
-        </gmd:characterEncoding>
-    </gmd:PT_Locale>
-</gmd:locale>
-<gmd:locale>...</gmd:locale>
+        &lt;/gmd:characterEncoding>
+    &lt;/gmd:PT_Locale>
+&lt;/gmd:locale>
+&lt;gmd:locale>...&lt;/gmd:locale>
                         </code></pre>
                     </section>
                     <section>
                         <h5>3. Textos multilingües</h5>
                         <pre><code class="xml">
-<gmd:xxxxxxxxx xsi:type="gmd:PT_FreeText_PropertyType">
-    <gco:CharacterString>Texto en el idioma principal</gco:CharacterString>
-    <gmd:PT_FreeText>
-        <gmd:textGroup>
-            <gmd:LocalisedCharacterString locale="#en">Text in secondary language</gmd:LocalisedCharacterString>
-        </gmd:textGroup>
-        <gmd:textGroup>...</gmd:textGroup>
-    </gmd:PT_FreeText>
-</gmd:xxxxxxxxx>
+&lt;gmd:xxxxxxxxx xsi:type="gmd:PT_FreeText_PropertyType">
+    &lt;gco:CharacterString>Texto en el idioma principal&lt;/gco:CharacterString>
+    &lt;gmd:PT_FreeText>
+        &lt;gmd:textGroup>
+            &lt;gmd:LocalisedCharacterString locale="#en">Text in secondary language&lt;/gmd:LocalisedCharacterString>
+        &lt;/gmd:textGroup>
+        &lt;gmd:textGroup>...&lt;/gmd:textGroup>
+    &lt;/gmd:PT_FreeText>
+&lt;/gmd:xxxxxxxxx>
                         </code></pre>
                     </section>
                 </section>
@@ -210,12 +232,55 @@
                     <h4>Ejemplo formulario de edición</h4>
                     <img src="images/multilang.png"/>
                 </section>
-                <section>Adaptar aspecto gráfico: web-ui, CSS
-                    <section>Cómo adaptar interfaz de búsqueda</section>
-                    <section>Añadir campos propios</section>
-                    <section>Añadir facets</section>
+                <section>
+                    <h3>Interfaz personalizada</h3>
+                    <section>
+                        <p>Partir de: <code class="hljs">GN_BASE => catalog/views/<mark>default</mark></code></p>
+                        <p>O bien del código fuente:<br/><code class="hljs">/web-ui/src/main/resources/catalog/views/<mark>default</mark></code></p>
+                        <p>Copiar contenido de <code class="hljs">default</code> en otra carpeta (p. ej. <code class="hljs">custom</code>), que llamaremos <code class="hljs">CUSTOM_VIEW_DIR</code>, y editar su contenido.</p>
+                    </section>
+                    <section>
+                        <h4>Plantillas HTML</h4>
+                        <p><code class="hljs">CUSTOM_VIEW_DIR => templates/*.html</code>
+                        <ul>
+                            <li>Plantillas HTML para las vistas públicas: home, map, search, result, recordView</li>
+                            <li>Basadas en Bootstrap y Angular</li>
+                            <li>Cambiar contenidos (p. ej. cabecera)</li>
+                    </section>
+                    <section>
+                        <h4>Estilos CSS (LESS)</h4>
+                        <p><code class="hljs">CUSTOM_VIEW_DIR => less/gn_view.less</code>
+                        <ul>
+                            <li>Fichero de estilos vacío, preparado para recibir estilos personalizados</li>
+                            <li>Basado en Bootstrap, se pueden usar plantillas existentes</li>
+                            <li>Cambiar tipografías, colores y maquetación fina</li>
+                    </section>
+                    <section>
+                        <h4>Cómo depurar</h4>
+                        <ul>
+                            <li>Partir del código fuente y compilar con maven</li>
+                            <li>Servidor de test con <code class="hljs">mvn jetty:run -Denv=dev</code> para evitar caché (wro4j)</li>
+                            <li>Añadir parámetro <code class="hljs">debug=true</code> en la URL para no minificar recursos CSS y JS</li>
+                    </section>
+                </section>
+                <section data-background="images/facetted.png">
+                    <h2>Búsqueda y resultados</h2>
                 </section>
                 <section>
+                    <h3>Búsqueda y resultados</h3>
+                    <h4>Añadir campo al índice lucene</h4>
+                    <p><code class="hljs">GN_BASE => WEB-INF/config-lucene.xml</code></p>
+                    <h4>Añadir clasificación "facetted"</h4>
+                    <p><code class="hljs">GN_BASE => WEB-INF/config-summary.xml</code></p>
+                    <h4>Muestra de resultados</h4>
+                    <ul>
+                        <li><code class="hljs">GN_BASE => catalog/views/custom/directives/partials/infolist.html</code></li>
+                        <li><code class="hljs">GN_BASE => catalog/components/search/resultsview/partials/viewtemplates/grid.html</code></li>
+                        <li><code class="hljs">GN_BASE => catalog/views/custom/templates/recordView.html</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <h6><a href="http://geomati.co">www.geomati.co</a> | <a href="https://www.geocat.net">www.geocat.net</a></h6>
                     <p><a href="http://fonts.cat/geonetwork-jiide2016">http://fonts.cat/geonetwork-jiide2016</a></p>
                 </section>
             </div>
