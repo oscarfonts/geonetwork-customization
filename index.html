@@ -16,6 +16,10 @@
                 display: inline;
                 font-size: x-large;
             }
+            .reveal h1, .reveal h2, .reveal h3 {
+                font-weight: bolder;
+                text-shadow: 2px 2px white;
+            }
         </style>
     </head>
     <body>
@@ -31,19 +35,19 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td><img class="plain" data-src="https://s.gravatar.com/avatar/04d983dc95ce1ae4d343050e9cf099d9"/></td>
+                                <td><img class="plain" src="https://s.gravatar.com/avatar/04d983dc95ce1ae4d343050e9cf099d9"/></td>
                                 <td style="vertical-align: middle;">Óscar Fonts</td>
-                                <td><img class="plain" data-src="http://geomati.co/imagenes/logo.png"/></td>
+                                <td><a href="http://geomati.co"><img class="plain" src="http://geomati.co/imagenes/logo.png"/></a></td>
                             </tr>
                             <tr>
-                                <td><img class="plain" data-src="https://s.gravatar.com/avatar/a670790f71aa89e67d4d8848ff0c19be"/></td>
+                                <td><img class="plain" src="https://s.gravatar.com/avatar/a670790f71aa89e67d4d8848ff0c19be"/></td>
                                 <td style="vertical-align: middle;">María Arias de Reyna</td>
-                                <td><img class="plain" data-src="https://www.geocat.net/wp-content/uploads/2013/02/GeoCat.png"/></td>
+                                <td><a href="https://geocat.net"><img class="plain" src="https://www.geocat.net/wp-content/uploads/2013/02/GeoCat.png"/></a></td>
                             </tr>
                             <tr>
-                                <td><img class="plain" data-src="https://s.gravatar.com/avatar/a8ea2581a78c0d63ac3952c0a522b27a"/></td>
+                                <td><img class="plain" src="https://s.gravatar.com/avatar/a8ea2581a78c0d63ac3952c0a522b27a"/></td>
                                 <td style="vertical-align: middle;">Víctor González</td>
-                                <td><img class="plain" data-src="http://geomati.co/imagenes/logo.png"/></td>
+                                <td><a href="http://geomati.co"><img class="plain" src="http://geomati.co/imagenes/logo.png"/></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -51,31 +55,68 @@
                 <section>
                     <h3>Servidores de test</h3>
                     <section>
-                        <p>Docker: <a href="https://hub.docker.com/r/oscarfonts/geonetwork/">oscarfonts/geonetwork</a></p>
-                        <p>GeoCat: <a href="https://vanilla.geocat.net">Demo Server</a></p>
+                        <p>Docker <a href="https://hub.docker.com/r/oscarfonts/geonetwork/">oscarfonts/geonetwork</a></p>
+                        <p>GeoCat <a href="https://vanilla.geocat.net">Demo Server</a></p>
                     </section>
                     <section>
-                        <iframe class="stretch" src="https://vanilla.geocat.net/geonetwork/"></iframe>
+                        <iframe class="stretch" data-src="https://vanilla.geocat.net/geonetwork/"></iframe>
                     </section>
                 </section>
-                <section>Despliegue, GN_BASE, GN_DATA_DIR</section>
-                <section>Configurar PostGIS
-                    <pre><code class="xml">
-                    <xml><hola attr="val">Que</hola>tal</xml>
-                    </code></pre>
-                </section>
-                <section data-background="images/highfive.jpg"><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Schema Plugin</h2></section>
-                <section data-background="images/leon1.jpg"><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Lo que necesito</h2></section>
-                <section data-background="images/fakeleon.jpg"><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Busco lo más parecido</h2></section>
                 <section>
-                    <section data-background="images/fit.jpg" ><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Adaptamos</h2></section>
-                    <section data-background="images/structure.jpg"><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">XSD</h2></section>
-                    <section data-background="images/fit2.jpg"><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Metadata View</h2><h3 style="font-weight:bolder;text-shadow: 2px 2px white;"><a href="https://github.com/geonetwork/core-geonetwork/blob/develop/web-ui/src/main/resources/catalog/views/default/templates/recordView.html">recordView.html</h3></section>
-                    <section data-background="images/smart.jpg"><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Editor</h2><h3 style="font-weight:bolder;text-shadow: 2px 2px white;"><a href="https://github.com/geonetwork/core-geonetwork/blob/develop/schemas/iso19139/src/main/plugin/iso19139/layout/config-editor.xml">config-editor.xml</a></h3></section>
-                    <section data-background="images/works.jpg"><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Schematron</h2></section>
-                    <section data-background="images/leon2.jpg" ><h2 style="font-weight:bolder;text-shadow: 2px 2px white;">Mi esquema</h2></section>
+                    <h3>Despliegue</h3>
+                    <p><code class="hljs">$GN_BASE</code> /var/lib/tomcat7/webapps/geonetwork/</p>
+                    <p><code class="hljs">$GN_DATA_DIR</code> /var/local/geonetwork_data/</p>
                 </section>
-                <section data-background="images/diversidad.jpg" ><h2 style="font-weight:bolder;text-shadow: 2px 2px white;"><a href="https://github.com/metadata101">Metadata 101</a></h2></section>
+                <section>
+                    <h3>PostGIS</h3>
+                    <section>
+                        <p><code class="hljs">GN_BASE => WEB-INF/config-node/srv.xml</code></p>
+                        <pre><code class="xml">
+    <!--import resource="../config-db/h2.xml"/-->
+    <import resource="../config-db/postgres.xml"></import>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><code class="hljs">GN_BASE => WEB-INF/config-db/jdbc.properties</code></p>
+                        <pre><code class="properties">
+    jdbc.host=127.0.0.1
+    jdbc.port=5432
+    jdbc.database=gn_db
+    jdbc.username=gn_user
+    jdbc.password=gn_pass
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><code class="hljs">GN_BASE => WEB-INF/config-db/postgres.xml</code></p>
+                        <pre><code class="xml">
+    ...
+    <import resource="postgis-alternate-datasource.xml"></import>
+    ...
+    <bean id="jdbcDriverClassName" class="java.lang.String">
+        <!--constructor-arg value="org.postgresql.Driver"/-->
+        <constructor-arg value="org.postgis.DriverWrapper"></constructor-arg>
+    </bean>
+    ...
+    <bean id="jdbcURL" class="java.lang.String">
+        <!--constructor-arg value="jdbc:postgresql://${jdbc.host}:5432/${jdbc.database}"/-->
+        <constructor-arg value="jdbc:postgresql_postGIS://${jdbc.host}:${jdbc.port}/${jdbc.database}"></constructor-arg>
+    </bean>
+    ...
+                        </code></pre>
+                    </section>
+                </section>
+                <section data-background="images/highfive.jpg"><h2>Schema Plugin</h2></section>
+                <section data-background="images/leon1.jpg"><h2>Lo que necesito</h2></section>
+                <section data-background="images/fakeleon.jpg"><h2>Busco lo más parecido</h2></section>
+                <section>
+                    <section data-background="images/fit.jpg" ><h2>Adaptamos</h2></section>
+                    <section data-background="images/structure.jpg"><h2>XSD</h2></section>
+                    <section data-background="images/fit2.jpg"><h2>Metadata View</h2><h3><a href="https://github.com/geonetwork/core-geonetwork/blob/develop/web-ui/src/main/resources/catalog/views/default/templates/recordView.html">recordView.html</h3></section>
+                    <section data-background="images/smart.jpg"><h2>Editor</h2><h3><a href="https://github.com/geonetwork/core-geonetwork/blob/develop/schemas/iso19139/src/main/plugin/iso19139/layout/config-editor.xml">config-editor.xml</a></h3></section>
+                    <section data-background="images/works.jpg"><h2>Schematron</h2></section>
+                    <section data-background="images/leon2.jpg" ><h2>Mi esquema</h2></section>
+                </section>
+                <section data-background="images/diversidad.jpg" ><h2><a href="https://github.com/metadata101">Metadata 101</a></h2></section>
                 <section>
                     <h3>Multiidioma</h3>
                     <h4>Transifex</h4>
