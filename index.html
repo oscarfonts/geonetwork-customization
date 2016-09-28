@@ -18,17 +18,26 @@
             }
             .reveal h1, .reveal h2, .reveal h3 {
                 font-weight: bolder;
-                text-shadow: 2px 2px white;
+                text-shadow: 3px 3px white;
+            }
+            h1.neg, h2.neg {
+                color: #88bbff;
+                text-shadow: 3px 3px black;
+            }
+            a.neg {
+                font-weight: bold;
+                color: #ff4444;
+                text-shadow: 3px 3px black;
             }
         </style>
     </head>
     <body>
         <div class="reveal">
             <div class="slides">
-                <section>
-                    <h1>GeoNetwork</h1>
-                    <h2>Personalización avanzada</h2>
-                    <p><a href="http://fonts.cat/geonetwork-jiide2016">http://fonts.cat/geonetwork-jiide2016</a></p>
+                <section data-background="images/workshop.jpg">
+                    <h1 class="neg">GeoNetwork</h1>
+                    <h2 class="neg">Personalización avanzada</h2>
+                    <p><a class="neg" href="http://fonts.cat/geonetwork-jiide2016">http://fonts.cat/geonetwork-jiide2016</a></p>
                 </section>
                 <section>
                     <h3>Nosotros</h3>
@@ -54,13 +63,8 @@
                 </section>
                 <section>
                     <h3>Servidores de test</h3>
-                    <section>
-                        <p>Docker <a href="https://hub.docker.com/r/oscarfonts/geonetwork/">oscarfonts/geonetwork</a></p>
-                        <p>GeoCat <a href="https://vanilla.geocat.net">Demo Server</a></p>
-                    </section>
-                    <section>
-                        <iframe class="stretch" data-src="https://vanilla.geocat.net/geonetwork/"></iframe>
-                    </section>
+                    <p>Docker <a href="https://hub.docker.com/r/oscarfonts/geonetwork/">oscarfonts/geonetwork</a></p>
+                    <p>GeoCat <a href="https://vanilla.geocat.net">Demo Server</a></p>
                 </section>
                 <section>
                     <h3>Despliegue</h3>
