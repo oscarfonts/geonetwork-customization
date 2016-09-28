@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="reveal.js/css/reveal.css">
         <link rel="stylesheet" href="reveal.js/css/theme/sky.css">
         <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+        <style type="text/css">
+            p > code.hljs { display: inline; }
+        </style>
     </head>
     <body>
         <div class="reveal">
@@ -25,19 +28,19 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td><img class="plain" data-src="https://s.gravatar.com/avatar/04d983dc95ce1ae4d343050e9cf099d9"/></td>
+                                <td><img class="plain" src="https://s.gravatar.com/avatar/04d983dc95ce1ae4d343050e9cf099d9"/></td>
                                 <td style="vertical-align: middle;">Óscar Fonts</td>
-                                <td><img class="plain" data-src="http://geomati.co/imagenes/logo.png"/></td>
+                                <td><a href="http://geomati.co"><img class="plain" src="http://geomati.co/imagenes/logo.png"/></a></td>
                             </tr>
                             <tr>
-                                <td><img class="plain" data-src="https://s.gravatar.com/avatar/a670790f71aa89e67d4d8848ff0c19be"/></td>
+                                <td><img class="plain" src="https://s.gravatar.com/avatar/a670790f71aa89e67d4d8848ff0c19be"/></td>
                                 <td style="vertical-align: middle;">María Arias de Reyna</td>
-                                <td><img class="plain" data-src="https://www.geocat.net/wp-content/uploads/2013/02/GeoCat.png"/></td>
+                                <td><a href="https://geocat.net"><img class="plain" src="https://www.geocat.net/wp-content/uploads/2013/02/GeoCat.png"/></a></td>
                             </tr>
                             <tr>
-                                <td><img class="plain" data-src="https://s.gravatar.com/avatar/a8ea2581a78c0d63ac3952c0a522b27a"/></td>
+                                <td><img class="plain" src="https://s.gravatar.com/avatar/a8ea2581a78c0d63ac3952c0a522b27a"/></td>
                                 <td style="vertical-align: middle;">Víctor González</td>
-                                <td><img class="plain" data-src="http://geomati.co/imagenes/logo.png"/></td>
+                                <td><a href="http://geomati.co"><img class="plain" src="http://geomati.co/imagenes/logo.png"/></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -45,18 +48,55 @@
                 <section>
                     <h3>Servidores de test</h3>
                     <section>
-                        <p>Docker: <a href="https://hub.docker.com/r/oscarfonts/geonetwork/">oscarfonts/geonetwork</a></p>
-                        <p>GeoCat: <a href="https://vanilla.geocat.net">Demo Server</a></p>
+                        <p>Docker <a href="https://hub.docker.com/r/oscarfonts/geonetwork/">oscarfonts/geonetwork</a></p>
+                        <p>GeoCat <a href="https://vanilla.geocat.net">Demo Server</a></p>
                     </section>
                     <section>
-                        <iframe class="stretch" src="https://vanilla.geocat.net/geonetwork/"></iframe>
+                        <iframe class="stretch" data-src="https://vanilla.geocat.net/geonetwork/"></iframe>
                     </section>
                 </section>
-                <section>Despliegue, GN_BASE, GN_DATA_DIR</section>
-                <section>Configurar PostGIS
-                    <pre><code class="xml">
-                    <xml><hola attr="val">Que</hola>tal</xml>
-                    </code></pre>
+                <section>
+                    <h3>Despliegue</h3>
+                    <p><code class="hljs">$GN_BASE</code> /var/lib/tomcat7/webapps/geonetwork/</p>
+                    <p><code class="hljs">$GN_DATA_DIR</code> /var/local/geonetwork_data/</p>
+                </section>
+                <section>
+                    <h3>PostGIS</h3>
+                    <section>
+                        <p><code class="hljs">GN_BASE => WEB-INF/config-node/srv.xml</code></p>
+                        <pre><code class="xml">
+    <!--import resource="../config-db/h2.xml"/-->
+    <import resource="../config-db/postgres.xml"></import>
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><code class="hljs">GN_BASE => WEB-INF/config-db/jdbc.properties</code></p>
+                        <pre><code class="properties">
+    jdbc.host=127.0.0.1
+    jdbc.port=5432
+    jdbc.database=gn_db
+    jdbc.username=gn_user
+    jdbc.password=gn_pass
+                        </code></pre>
+                    </section>
+                    <section>
+                        <p><code class="hljs">GN_BASE => WEB-INF/config-db/postgres.xml</code></p>
+                        <pre><code class="xml">
+    ...
+    <import resource="postgis-alternate-datasource.xml"></import>
+    ...
+    <bean id="jdbcDriverClassName" class="java.lang.String">
+        <!--constructor-arg value="org.postgresql.Driver"/-->
+        <constructor-arg value="org.postgis.DriverWrapper"></constructor-arg>
+    </bean>
+    ...
+    <bean id="jdbcURL" class="java.lang.String">
+        <!--constructor-arg value="jdbc:postgresql://${jdbc.host}:5432/${jdbc.database}"/-->
+        <constructor-arg value="jdbc:postgresql_postGIS://${jdbc.host}:${jdbc.port}/${jdbc.database}"></constructor-arg>
+    </bean>
+    ...
+                        </code></pre>
+                    </section>
                 </section>
                 <section>[@delawen] Schema Plugins, metadata 101</section>
                 <section>[@delawen] Cómo extender namespace MD_Metadata
