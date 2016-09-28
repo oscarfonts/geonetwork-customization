@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" href="reveal.js/css/reveal.css">
         <link rel="stylesheet" href="reveal.js/css/theme/white.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-dark.min.css">
     </head>
     <body>
         <div class="reveal">
@@ -10,7 +11,11 @@
                 <section>Autores</section>
                 <section>Servidores de test (vanilla, docker)</section>
                 <section>Despliegue, GN_BASE, GN_DATA_DIR</section>
-                <section>Configurar PostGIS</section>
+                <section>Configurar PostGIS
+                    <pre><code class="xml">
+                    <xml><hola attr="val">Que</hola>tal</xml>
+                    </code></pre>
+                </section>
                 <section>[@delawen] Schema Plugins, metadata 101</section>
                 <section>[@delawen] Cómo extender namespace MD_Metadata
                     <section>XSD</section>
@@ -33,9 +38,22 @@
                  
             </div>
         </div>
+        <script src="reveal.js/lib/js/head.min.js"></script>
         <script src="reveal.js/js/reveal.js"></script>
         <script>
-            Reveal.initialize();
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                dependencies: [{
+                    src: 'reveal.js/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                }]
+            });
         </script>
     </body>
 </html>
